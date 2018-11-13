@@ -11,7 +11,7 @@ from keras.utils.generic_utils import Progbar
 
 def Alexnet(input_shape=(227,227,3),num_classes=5):
     cnn=Sequential()
-    cnn.add(Conv2D(96,11,padding='valid',strides=4,input_shape=input_shape))
+    cnn.add(Conv2D(96,11,activation='relu',padding='same',strides=4,input_shape=input_shape))
     cnn.add(MaxPooling2D(pool_size=2))
     cnn.add(Conv2D(256,5,padding='same'))
     cnn.add(MaxPooling2D(pool_size=2))
