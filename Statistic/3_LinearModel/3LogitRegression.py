@@ -21,8 +21,14 @@ def updatebeta(beta,x,y):
     beta=beta-(dbeta/ddbeta)
     return beta
 
+import time
+import progressbar
 
 if __name__=='__main__':
+
+    for i in progressbar.progressbar(range(100)):
+        time.sleep(0.02)
+
     x_train=np.array([[0.697,0.460],
                     [0.774,0.376],
                     [0.634,0.264],

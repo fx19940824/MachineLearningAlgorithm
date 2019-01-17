@@ -1,13 +1,6 @@
 import numpy as np
 
-import argparse
-import os
-import sys
-import time
-
 import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
-from keras.datasets import mnist
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from keras.models import Model
 
@@ -156,6 +149,8 @@ def inference(images, n_classes):
             bias = tf.nn.bias_add(conv, biases)
             conv1 = tf.nn.relu(bias, name=scope)
             print_activations(conv1)
+            tf.summary.histogram('block1_w1',kernel)
+            tf.summary.histogram('block1_b1',biases)
             parameters += [kernel, biases]
 
         with tf.name_scope('block1_conv2') as scope:
@@ -384,7 +379,7 @@ def inference(images, n_classes):
                 name='block4_pool')
             print_activations(pool4)
 
-    '''with tf.name_scope('block5') as scope_block:
+    with tf.name_scope('block5') as scope_block:
         with tf.name_scope('block5_conv1') as scope:
             kernel = tf.Variable(
                 tf.truncated_normal([3, 3, 512, 512],
@@ -460,7 +455,7 @@ def inference(images, n_classes):
                 strides=[1, 2, 2, 1],
                 padding='VALID',
                 name='block5_pool')
-            print_activations(pool5)'''
+            print_activations(pool5)
 
     with tf.name_scope('flatten') as scope:
         flatten = tf.contrib.layers.flatten(pool4)
@@ -477,7 +472,7 @@ def inference(images, n_classes):
         fc3 = tf.layers.dense(fc2, n_classes)
         fc3 = tf.nn.softmax(fc3, name=scope)
 
-    return fc3
+    return fc3,parameters
 
 
 def loss(logits, labels):

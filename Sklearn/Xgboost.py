@@ -1,5 +1,6 @@
 import xgboost as xgb
 from sklearn import datasets
+import sklearn.ensemble
 import matplotlib
 import pandas
 

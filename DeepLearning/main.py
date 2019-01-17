@@ -13,7 +13,7 @@ from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from keras.models import Model
 
 import DataManager
-import VGG
+from ModelManager import VGG,Inception
 
 FLAGS = None
 
